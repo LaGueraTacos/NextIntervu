@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
+import { OnboardingWelcome } from '@/emails/OnboardingWelcome'
+import { sendEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,6 +56,23 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+
+    // Fire-and-forget onboarding email (non-blocking)
+    ;(async () => {
+      try {
+        await sendEmail({
+          to: email,
+          subject: `Welcome to ${process.env.APP_NAME || 'NextIntervu'} — You’re on the early access list 🎉`,
+          react: OnboardingWelcome({ name, role, experience }),
+          tags: [
+            { name: 'type', value: 'Onboarding-NextIntervu' },
+            { name: 'cohort', value: 'early-signup' },
+          ],
+        })
+      } catch (err) {
+        console.error('Onboarding email send failed:', err)
+      }
+    })()
 
     return NextResponse.json(
       { 
