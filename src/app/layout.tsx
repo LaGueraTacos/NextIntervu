@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   description: "Practice your next interview with AI. Get tailored questions, instant feedback, and ace your interviews with NextIntervu.",
   keywords: "interview prep, AI interview, mock interview, job interview practice, career preparation",
   authors: [{ name: "NextIntervu" }],
+  icons: {
+    icon: "/logo/intervu (1).png",
+    shortcut: "/logo/intervu (1).png",
+    apple: "/logo/intervu (1).png",
+  },
   openGraph: {
     title: "NextIntervu - AI-Powered Interview Prep",
     description: "Practice your next interview with AI. Get tailored questions and instant feedback.",
