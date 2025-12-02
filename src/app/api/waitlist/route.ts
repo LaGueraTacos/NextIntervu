@@ -8,10 +8,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { email, name, role, experience, company, skills } = body
 
-    // Validate required fields
-    if (!email || !name || !role || !experience || !skills) {
+    // Validate required fields - only email and name are required for initial signup
+    if (!email || !name) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Email and name are required' },
         { status: 400 }
       )
     }
@@ -32,10 +32,10 @@ export async function POST(request: NextRequest) {
         {
           email,
           name,
-          role,
-          experience,
+          role: role || 'Not specified',
+          experience: experience || 'Not specified',
           company: company || null,
-          skills,
+          skills: skills || [],
         },
       ])
       .select()
@@ -62,8 +62,8 @@ export async function POST(request: NextRequest) {
       try {
         await sendEmail({
           to: email,
-          subject: `Welcome to ${process.env.APP_NAME || 'NextIntervu'} — You’re on the early access list 🎉`,
-          react: OnboardingWelcome({ name, role, experience }),
+          subject: `Welcome to ${process.env.APP_NAME || 'NextIntervu'} — Your account is ready! 🎉`,
+          react: OnboardingWelcome({ name, role: role || 'Not specified', experience: experience || 'Not specified' }),
           tags: [
             { name: 'type', value: 'Onboarding-NextIntervu' },
             { name: 'cohort', value: 'early-signup' },
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Successfully added to waitlist!',
+        message: 'Account created successfully!',
         data: data[0]
       },
       { status: 201 }
