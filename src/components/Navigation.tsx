@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from 'react';
 
 export default function Navigation() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -18,7 +20,7 @@ export default function Navigation() {
         <div className="flex items-center">
           <Link href="/">
             <Image
-              src="/logo/intervu (2).png"
+              src="/logo/intervu.png"
               alt="NextIntervu Logo"
               width={110}
               height={80}
@@ -53,12 +55,12 @@ export default function Navigation() {
 
         {/* Desktop CTA Button */}
         <div className="hidden md:flex items-center space-x-2">
-          <button 
-            onClick={() => window.location.href = '/signup'}
+          <Link 
+            href="/signup"
             className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2.5 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/25 hover:scale-105 font-semibold text-base"
           >
             Get Started
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -101,15 +103,13 @@ export default function Navigation() {
             >
               Pricing
             </Link>
-            <button 
-              onClick={() => {
-                window.location.href = '/signup';
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/25 font-semibold text-base"
+            <Link 
+              href="/signup"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/25 font-semibold text-base block text-center"
             >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       )}
