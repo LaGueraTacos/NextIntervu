@@ -1,4 +1,4 @@
-import { createServerClient } from '@supabase/ssr'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
@@ -16,11 +16,33 @@ export async function GET(request: Request) {
           get(name: string) {
             return cookieStore.get(name)?.value
           },
-          set(name: string, value: string, options: any) {
-            cookieStore.set({ name, value, ...options })
+          set(name: string, value: string, options: CookieOptions) {
+            // Convert Supabase CookieOptions to Next.js cookie format
+            const nextCookieOptions: Parameters<typeof cookieStore.set>[0] = {
+              name,
+              value,
+              ...(options.httpOnly !== undefined && { httpOnly: options.httpOnly }),
+              ...(options.secure !== undefined && { secure: options.secure }),
+              ...(options.sameSite !== undefined && typeof options.sameSite === 'string' && { sameSite: options.sameSite }),
+              ...(options.maxAge !== undefined && { maxAge: options.maxAge }),
+              ...(options.path !== undefined && { path: options.path }),
+              ...(options.domain !== undefined && { domain: options.domain }),
+            }
+            cookieStore.set(nextCookieOptions)
           },
-          remove(name: string, options: any) {
-            cookieStore.set({ name, value: '', ...options })
+          remove(name: string, options: CookieOptions) {
+            // Convert Supabase CookieOptions to Next.js cookie format
+            const nextCookieOptions: Parameters<typeof cookieStore.set>[0] = {
+              name,
+              value: '',
+              ...(options.httpOnly !== undefined && { httpOnly: options.httpOnly }),
+              ...(options.secure !== undefined && { secure: options.secure }),
+              ...(options.sameSite !== undefined && typeof options.sameSite === 'string' && { sameSite: options.sameSite }),
+              ...(options.maxAge !== undefined && { maxAge: options.maxAge }),
+              ...(options.path !== undefined && { path: options.path }),
+              ...(options.domain !== undefined && { domain: options.domain }),
+            }
+            cookieStore.set(nextCookieOptions)
           },
         },
       }
