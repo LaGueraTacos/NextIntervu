@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 
 export default function PricingPage() {
+  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<'free' | 'premium' | 'pro'>('premium');
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900">
@@ -84,7 +86,7 @@ export default function PricingPage() {
                 </li>
               </ul>
 
-              <button className="mt-auto w-full py-3 px-6 rounded-xl border-2 border-slate-600 text-slate-300 font-semibold hover:border-slate-500 hover:text-white hover:bg-slate-700/50 transition-all duration-200" onClick={() => window.location.href = '/signup'}>
+              <button className="mt-auto w-full py-3 px-6 rounded-xl border-2 border-slate-600 text-slate-300 font-semibold hover:border-slate-500 hover:text-white hover:bg-slate-700/50 transition-all duration-200" onClick={() => router.push('/signup')}>
                 Get Started Free
               </button>
             </div>
@@ -148,7 +150,7 @@ export default function PricingPage() {
                 </li>
               </ul>
 
-              <button className="mt-auto w-full py-3 px-6 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105" onClick={() => window.location.href = '/signup'}>
+              <button className="mt-auto w-full py-3 px-6 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105" onClick={() => router.push('/signup')}>
                 Start Premium Trial
               </button>
             </div>
@@ -209,7 +211,7 @@ export default function PricingPage() {
 
               <button
                 className="mt-auto w-full py-3 px-6 rounded-xl border-2 border-purple-500 text-purple-400 font-semibold hover:border-purple-400 hover:text-white hover:bg-purple-500/10 transition-all duration-200"
-                onClick={() => window.location.href = '/signup'}
+                onClick={() => router.push('/signup')}
               >
                 Go Pro
               </button>
@@ -263,7 +265,7 @@ export default function PricingPage() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
-              onClick={() => window.location.href = '/signup'}
+              onClick={() => router.push('/signup')}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-12 py-6 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105"
             >
               Start Free Trial

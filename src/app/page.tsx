@@ -1,9 +1,12 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Navigation from "@/components/Navigation";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900">
       <Navigation />
@@ -30,7 +33,7 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
               <button 
-                onClick={() => window.location.href = '/signup'}
+                onClick={() => router.push('/signup')}
                 className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-lg text-base sm:text-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 Start Free Practice Session
@@ -153,7 +156,7 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
-              onClick={() => window.location.href = '/signup'}
+              onClick={() => router.push('/signup')}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-12 py-6 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105"
             >
               Start Free Trial Now
@@ -194,7 +197,7 @@ export default function Home() {
             {/* Brand */}
             <div className="flex items-center mb-6 md:mb-0">
           <Image
-                  src="/logo/intervu (2).png"
+                  src="/logo/intervu.png"
                   alt="NextIntervu Logo"
                   width={120}
                   height={66}
@@ -207,7 +210,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-8 text-sm">
               <a href="#features" className="text-slate-400 hover:text-white transition-colors">Features</a>
               <a href="#how-it-works" className="text-slate-400 hover:text-white transition-colors">How it Works</a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors" onClick={() => window.location.href = '/pricing'}>Pricing</a>
+              <Link href="/pricing" className="text-slate-400 hover:text-white transition-colors">Pricing</Link>
               <a href="#" className="text-slate-400 hover:text-white transition-colors">Contact</a>
               <a href="#" className="text-slate-400 hover:text-white transition-colors">Privacy</a>
             </div>
