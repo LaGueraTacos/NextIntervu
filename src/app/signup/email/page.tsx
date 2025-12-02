@@ -160,7 +160,7 @@ export default function EmailSignupPage() {
               {/* Brand */}
               <div className="flex items-center mb-6 md:mb-0">
                 <Image
-                  src="/logo/intervu.png"
+                  src="/logo/intervu (3).png"
                   alt="NextIntervu Logo"
                   width={120}
                   height={66}

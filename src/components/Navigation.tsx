@@ -20,7 +20,7 @@ export default function Navigation() {
         <div className="flex items-center">
           <Link href="/">
             <Image
-              src="/logo/intervu.png"
+              src="/logo/intervu (3).png"
               alt="NextIntervu Logo"
               width={110}
               height={80}
