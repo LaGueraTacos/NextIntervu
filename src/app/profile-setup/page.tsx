@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { createBrowserClient } from '@supabase/ssr';
 
 export default function ProfileSetupPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -255,13 +257,13 @@ export default function ProfileSetupPage() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button 
-                onClick={() => window.location.href = '/dashboard'}
+                onClick={() => router.push('/dashboard')}
                 className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-10 py-5 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 Start Your First Interview
               </button>
               <button 
-                onClick={() => window.location.href = '/pricing'}
+                onClick={() => router.push('/pricing')}
                 className="border-2 border-slate-600 text-slate-300 px-10 py-5 rounded-lg text-lg font-semibold hover:border-slate-500 hover:text-white hover:bg-slate-800/20 transition-all duration-200"
               >
                 View Pricing Plans
@@ -277,7 +279,7 @@ export default function ProfileSetupPage() {
               {/* Brand */}
               <div className="flex items-center mb-6 md:mb-0">
                 <Image
-                  src="/logo/intervu (2).png"
+                  src="/logo/intervu.png"
                   alt="NextIntervu Logo"
                   width={120}
                   height={66}
