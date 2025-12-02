@@ -17,10 +17,32 @@ export async function GET(request: Request) {
             return cookieStore.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            cookieStore.set({ name, value, ...options })
+            // Convert Supabase CookieOptions to Next.js cookie format
+            const nextCookieOptions: Parameters<typeof cookieStore.set>[0] = {
+              name,
+              value,
+              ...(options.httpOnly !== undefined && { httpOnly: options.httpOnly }),
+              ...(options.secure !== undefined && { secure: options.secure }),
+              ...(options.sameSite !== undefined && typeof options.sameSite === 'string' && { sameSite: options.sameSite }),
+              ...(options.maxAge !== undefined && { maxAge: options.maxAge }),
+              ...(options.path !== undefined && { path: options.path }),
+              ...(options.domain !== undefined && { domain: options.domain }),
+            }
+            cookieStore.set(nextCookieOptions)
           },
           remove(name: string, options: CookieOptions) {
-            cookieStore.set({ name, value: '', ...options })
+            // Convert Supabase CookieOptions to Next.js cookie format
+            const nextCookieOptions: Parameters<typeof cookieStore.set>[0] = {
+              name,
+              value: '',
+              ...(options.httpOnly !== undefined && { httpOnly: options.httpOnly }),
+              ...(options.secure !== undefined && { secure: options.secure }),
+              ...(options.sameSite !== undefined && typeof options.sameSite === 'string' && { sameSite: options.sameSite }),
+              ...(options.maxAge !== undefined && { maxAge: options.maxAge }),
+              ...(options.path !== undefined && { path: options.path }),
+              ...(options.domain !== undefined && { domain: options.domain }),
+            }
+            cookieStore.set(nextCookieOptions)
           },
         },
       }
